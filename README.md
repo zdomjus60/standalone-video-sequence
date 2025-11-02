@@ -1,60 +1,60 @@
 # Standalone Video Sequence
 
-Un **eseguibile standalone** che riproduce una sequenza di brevi video **con audio sincronizzato**, funzionante su **Windows** e **Linux** — senza richiedere un lettore video esterno.
+A **standalone executable** that plays a sequence of short videos **with synchronized audio**, running on **Windows** and **Linux** — no external video player required.
 
-Questo progetto è ideale per installazioni artistiche, chioschi interattivi, presentazioni o qualsiasi scenario in cui sia necessaria una riproduzione video automatica e senza interruzioni con audio dedicato o continuo.
+This project is ideal for artistic installations, interactive kiosks, presentations, or any scenario where automatic and seamless video playback with dedicated or continuous audio is required.
 
-## Caratteristiche
+## Features
 
--   **Nessun lettore video esterno richiesto:** Tutto è gestito dall'eseguibile.
--   **File eseguibile singolo:** Distribuito come un singolo file `.exe` (Windows) o binario (Linux) grazie a PyInstaller.
--   **Riproduzione audio sincronizzata:** Supporta tracce audio dedicate per ogni video o una traccia audio continua per un gruppo di video.
--   **Transizioni fluide:** Implementa dissolvenze audio per transizioni più morbide tra i video.
--   **Configurazione semplice:** La sequenza di riproduzione è definita tramite un semplice file di testo (`videolist.txt`).
--   **Compatibilità cross-platform:** Funziona su sistemi operativi Windows e Linux.
+-   **No external video player required:** Everything is handled by the executable.
+-   **Single executable file:** Distributed as a single `.exe` file (Windows) or binary (Linux) thanks to PyInstaller.
+-   **Synchronized audio playback:** Supports dedicated audio tracks for each video or a continuous audio track for a group of videos.
+-   **Smooth transitions:** Implements audio fades for smoother transitions between videos.
+-   **Simple configuration:** The playback sequence is defined via a simple text file (`videolist.txt`).
+-   **Cross-platform compatibility:** Works on Windows and Linux operating systems.
 
-## Requisiti di Sviluppo
+## Development Requirements
 
-Per sviluppare o ricompilare il progetto, avrai bisogno di:
+To develop or recompile the project, you will need:
 
 -   Python 3.x
 -   `opencv-python`
 -   `pygame`
 -   `pyinstaller`
--   **FFmpeg:** Necessario per l'estrazione dell'audio dai file video (vedi la sezione "Estrazione Audio").
+-   **FFmpeg:** Required for extracting audio from video files (see "Audio Extraction" section).
 
-Puoi installare le dipendenze Python con pip:
+You can install Python dependencies with pip:
 
 ```bash
 pip install opencv-python pygame pyinstaller
 ```
 
-## Utilizzo
+## Usage
 
-1.  **Prepara i tuoi video:** Assicurati che i tuoi file video siano in un formato compatibile (es. `.mp4`).
-2.  **Prepara l'audio (Opzionale):**
-    *   Se i tuoi video hanno già tracce audio incorporate o preferisci file audio separati, assicurati che siano nello stesso formato (es. `.mp3`).
-    *   Puoi usare lo script `extract_audio.py` per estrarre l'audio dai tuoi file video (vedi "Estrazione Audio").
-3.  **Configura `videolist.txt`:** Modifica il file `videolist.txt` per definire la sequenza di riproduzione.
+1.  **Prepare your videos:** Ensure your video files are in a compatible format (e.g., `.mp4`).
+2.  **Prepare audio (Optional):**
+    *   If your videos already have embedded audio tracks or you prefer separate audio files, ensure they are in the same format (e.g., `.mp3`).
+    *   You can use the `extract_audio.py` script to extract audio from your video files (see "Audio Extraction").
+3.  **Configure `videolist.txt`:** Modify the `videolist.txt` file to define the playback sequence.
 
-    ### Formato di `videolist.txt`
+    ### `videolist.txt` Format
 
-    Ogni riga nel `videolist.txt` rappresenta un elemento nella sequenza di riproduzione. Le righe vuote o che iniziano con `#` vengono ignorate.
+    Each line in `videolist.txt` represents an item in the playback sequence. Empty lines or lines starting with `#` are ignored.
 
-    #### Video con Audio Dedicato
+    #### Video with Dedicated Audio
 
-    Per riprodurre un video con un file audio specifico:
+    To play a video with a specific audio file:
 
     ```
     video_file.mp4, audio_file.mp3
     ```
 
-    *   `video_file.mp4`: Il percorso del file video.
-    *   `audio_file.mp3`: Il percorso del file audio da riprodurre con questo video. Se omesso, il video verrà riprodotto senza audio. Se il campo è vuoto (es. `video_file.mp4,`), il sistema cercherà un file audio con lo stesso nome del video ma con estensione `.mp3` (es. `video_file.mp3`).
+    *   `video_file.mp4`: The path to the video file.
+    *   `audio_file.mp3`: The path to the audio file to play with this video. If omitted, the video will play silently. If the field is empty (e.g., `video_file.mp4,`), the system will look for an audio file with the same name as the video but with a `.mp3` extension (e.g., `video_file.mp3`).
 
-    #### Gruppi di Video con Audio Continuo
+    #### Video Groups with Continuous Audio
 
-    Per riprodurre una sequenza di video con una singola traccia audio continua in sottofondo:
+    To play a sequence of videos with a single continuous audio track in the background:
 
     ```
     CONTINUOUS_AUDIO_GROUP, continuous_background_audio.mp3
@@ -63,38 +63,38 @@ pip install opencv-python pygame pyinstaller
     END_CONTINUOUS_AUDIO_GROUP
     ```
 
-    *   `CONTINUOUS_AUDIO_GROUP, continuous_background_audio.mp3`: Inizia un blocco di audio continuo. `continuous_background_audio.mp3` è il file audio che verrà riprodotto per tutti i video all'interno di questo gruppo.
-    *   `video1.mp4`, `video2.mp4`: I video all'interno del gruppo.
-    *   `END_CONTINUOUS_AUDIO_GROUP`: Termina il blocco di audio continuo.
+    *   `CONTINUOUS_AUDIO_GROUP, continuous_background_audio.mp3`: Starts a continuous audio block. `continuous_background_audio.mp3` is the audio file that will play for all videos within this group.
+    *   `video1.mp4`, `video2.mp4`: The videos within the group.
+    *   `END_CONTINUOUS_AUDIO_GROUP`: Ends the continuous audio block.
 
-4.  **Esegui il programma:**
+4.  **Run the program:**
 
-    *   **Dallo script Python:**
+    *   **From the Python script:**
         ```bash
         python standalone_video_with_audio.py
         ```
-    *   **Dall'eseguibile standalone:** Esegui il file generato da PyInstaller (es. `standalone_video_with_audio.exe` su Windows o `standalone_video_with_audio` su Linux).
+    *   **From the standalone executable:** Run the file generated by PyInstaller (e.g., `standalone_video_with_audio.exe` on Windows or `standalone_video_with_audio` on Linux).
 
-## Estrazione Audio
+## Audio Extraction
 
-Lo script `extract_audio.py` ti permette di estrarre automaticamente le tracce audio dai tuoi file video e salvarle come file `.mp3`. Questo è utile se i tuoi video non hanno tracce audio separate o se vuoi usare una traccia audio specifica.
+The `extract_audio.py` script allows you to automatically extract audio tracks from your video files and save them as `.mp3` files. This is useful if your videos do not have separate audio tracks or if you want to use a specific audio track.
 
-**Requisito:** Devi avere **FFmpeg** installato e accessibile nel tuo PATH di sistema.
+**Requirement:** You must have **FFmpeg** installed and accessible in your system's PATH.
 
-Per estrarre l'audio da tutti i file `.mp4` nella directory corrente:
+To extract audio from all `.mp4` files in the current directory:
 
 ```bash
 python extract_audio.py
 ```
 
-Lo script creerà file `.mp3` corrispondenti (es. `video.mp4` -> `video.mp3`).
+The script will create corresponding `.mp3` files (e.g., `video.mp4` -> `video.mp3`).
 
-## Costruire l'Eseguibile Standalone
+## Build the Standalone Executable
 
-Il progetto utilizza PyInstaller per creare un singolo file eseguibile.
+The project uses PyInstaller to create a single executable file.
 
-1.  Assicurati di aver installato PyInstaller (`pip install pyinstaller`).
-2.  Esegui lo script di build appropriato per il tuo sistema operativo:
+1.  Ensure you have PyInstaller installed (`pip install pyinstaller`).
+2.  Run the appropriate build script for your operating system:
     *   **Windows:**
         ```bash
         build_exe.bat
@@ -104,12 +104,12 @@ Il progetto utilizza PyInstaller per creare un singolo file eseguibile.
         ./build_exe.sh
         ```
 
-    Questi script utilizzeranno `standalone_video_with_audio.spec` per configurare la build di PyInstaller. L'eseguibile risultante si troverà nella directory `dist/`.
+    These scripts will use `standalone_video_with_audio.spec` to configure the PyInstaller build. The resulting executable will be found in the `dist/` directory.
 
-## Licenza
+## License
 
-[TODO: Aggiungere informazioni sulla licenza, es. MIT, GPL, ecc.]
+[TODO: Add license information, e.g., MIT, GPL, etc.]
 
-## Contribuzioni
+## Contributions
 
-Le contribuzioni sono benvenute! Si prega di fare riferimento alle linee guida di contribuzione (se presenti) o di aprire una issue per discutere le modifiche proposte.
+Contributions are welcome! Please refer to the contribution guidelines (if any) or open an issue to discuss proposed changes.

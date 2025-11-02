@@ -1,0 +1,22 @@
+# Byte-code files
+*.pyc
+__pycache__/
+
+# PyInstaller
+*.spec
+build/
+dist/
+
+# Virtual environment
+venv/
+
+# OS generated files
+.DS_Store
+.env
+
+# Logs
+*.log
+
+# My custom files
+errore.txt
+README.md.save

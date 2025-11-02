@@ -1,0 +1,15 @@
+# This example plays 'musica.mp3' continuously over both videos.
+# First, make sure you have created 'musica.mp3' by running:
+# python3 extract_audio.py
+# (This will convert musica.mp4 to musica.mp3)
+Name_your_favourite.mp4, Prelude_and_Fugue_in_F_minor.mp3
+CONTINUOUS_AUDIO_GROUP, musica.mp3
+
+240_F_1518494776_GnvkpHQpVgjXCD7HHN3sMGKxzsNlk716_ST.mp4
+240_F_536444074_xJzJpdC81lWE6gl8mnWXrxIoIU4OPbgZ_ST.mp4
+
+END_CONTINUOUS_AUDIO_GROUP
+Let_me_do.mp4,
+Name_your_favourite.mp4,
+240_F_536444074_xJzJpdC81lWE6gl8mnWXrxIoIU4OPbgZ_ST.mp4
+Let_me_do.mp4
